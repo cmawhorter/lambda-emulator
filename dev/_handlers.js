@@ -8,6 +8,14 @@ module.exports = {
     }), 0);
   },
 
+  lambda2: function(event, context, callback) {
+    console.log('Event', JSON.stringify(event, null, 2));
+    console.log('Context', JSON.stringify(context, null, 2));
+    setTimeout(() => callback(null, {
+      second: 'handler'
+    }), 0);
+  },
+
   apigateway: function(event, context, callback) {
     console.log('Event', JSON.stringify(event, null, 2));
     console.log('Context', JSON.stringify(context, null, 2));

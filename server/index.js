@@ -7,7 +7,14 @@ const createContext = require('../lambda/context.js');
 const apigatewayRequestHandler = require('../origins/api-gateway.js');
 const lambdaRequestHandler = require('../origins/lambda.js');
 
-module.exports = function(lambdaHandler, type) {
+module.exports = function(options) {
+  if (typeof options === 'function') {
+    options = {
+      type:     arguments[1],
+      handler:  options,
+    };
+  }
+  let type = options.type;
   let server = new Hapi.Server();
 
   server.connection({
@@ -25,7 +32,6 @@ module.exports = function(lambdaHandler, type) {
     default:
       throw new Error(`invalid emulation type: ${type}`);
   }
-  let handler = requestHandler(lambdaHandler, createContext);
   server.route({
     method: [ 'OPTIONS', 'GET', 'PUT', 'PATCH', 'POST', 'DELETE' ],
     path: '/{mock*}',
@@ -36,6 +42,7 @@ module.exports = function(lambdaHandler, type) {
         url:          rawReq.url,
         headers:      rawReq.headers,
       }, null, 2));
+      let handler = requestHandler(options.handler, createContext);
       handler(req, reply);
     },
   });
