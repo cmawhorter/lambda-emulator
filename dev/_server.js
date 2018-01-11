@@ -4,8 +4,9 @@ var handlers = require('./_handlers.js');
 var CreateServer = require('../server/index.js');
 
 var type = process.argv[2];
+var handler_variant = process.argv[3] || type;
 
-var options = { handler: handlers[type], type };
+var options = { handler: handlers[handler_variant], type };
 console.log('options.handler', options.handler);
 CreateServer(options);
 if ('lambda' === type) {

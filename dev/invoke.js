@@ -21,5 +21,7 @@ lambda.invoke({
   }),
 }, (err, data) => {
   assert.ifError(err);
-  console.log(data);
+  console.log('Raw: ', data);
+  console.log('Status code: ', data.StatusCode);
+  console.log('Decoded: ', JSON.parse(data.Payload));
 });

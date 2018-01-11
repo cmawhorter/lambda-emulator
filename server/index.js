@@ -1,5 +1,6 @@
 'use strict';
 
+// hapi sucks.  need to just switch to bare require('http')
 const Hapi = require('hapi');
 
 const createContext = require('../lambda/context.js');
@@ -42,7 +43,7 @@ module.exports = function(options) {
         url:          rawReq.url,
         headers:      rawReq.headers,
       }, null, 2));
-      let handler = requestHandler(options.handler, createContext);
+      let handler = requestHandler(options.handler, createContext, options);
       handler(req, reply);
     },
   });
@@ -52,7 +53,9 @@ module.exports = function(options) {
     console.log('Response', {
       statusCode:     res.statusCode,
       headers:        res.headers,
-      body:           res.body,
+      // body:           res.body,
+      body:           res.source,
+      bodyType:       typeof res.source,
     });
   });
 

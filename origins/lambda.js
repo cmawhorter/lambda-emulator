@@ -4,7 +4,7 @@ const uuid = require('uuid');
 const lambdaApi = require('../lambda/api-incoming.js');
 const arn = require('../lib/arn.js');
 
-module.exports = function(lambdaHandler, createContext) {
+module.exports = function(lambdaHandler, createContext, options) {
   return (request, reply) => {
     if (request.method !== 'post') {
       return reply(new Error('Only http POST is allowed: ' + request.method));
@@ -30,16 +30,16 @@ module.exports = function(lambdaHandler, createContext) {
       functionName,
       clientContext,
     }, (err, invocationOutcome) => {
-      var result = {};
+      var result;
       let statusCode;
       if (err) {
         console.log('invocation error:', err.stack || err);
         statusCode = 500;
-        result.FunctionError = 'Handled';
+        result = { FunctionError: 'Handled' };
       }
       else {
         statusCode = 200;
-        result.Payload = JSON.stringify(invocationOutcome);
+        result = JSON.stringify(invocationOutcome);
       }
       let response = reply(result);
       response.type('application/json');

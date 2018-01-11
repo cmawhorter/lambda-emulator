@@ -8,12 +8,12 @@
   },
   "dependencies": {
     "deep-assign": "^2.0.0",
-    "hapi": "^16.1.0",
+    "hapi": "16.1.0",
     "urn": "github:cmawhorter/urn#1.0.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "aws-sdk": "^2.7.27",
+    "aws-sdk": "2.7.27",
     "concurrently": "^3.1.0",
     "nodemon": "^1.11.0"
   }
