@@ -1,7 +1,7 @@
 {
   "name": "lambda-emulator",
   "description": "Web server that emulates various AWS Lambda invocations for development",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./server/index.js",
   "scripts": {
     "dev": "nodemon ./dev/_server.js"
