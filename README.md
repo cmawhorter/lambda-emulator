@@ -1,3 +1,5 @@
+**If you're coming here still, you should probably be going [here](https://github.com/lambci/docker-lambda) instead**
+
 # lambda-emulator
 
 Goal: Test invoking lambda functions locally in a manner that is as close to production as sanely possible.
